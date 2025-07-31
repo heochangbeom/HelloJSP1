@@ -41,6 +41,19 @@
 			<artifactId>taglibs-standard-impl</artifactId>
 			<version>1.2.5</version>
 		</dependency>
+		
+		<dependency>
+			<groupId>javax.servlet</groupId>
+			<artifactId>javax.servlet-api</artifactId>
+			<version>4.0.1</version>
+			<scope>provided</scope>
+		</dependency>
+		
+		<dependency>
+    <groupId>org.apache.tomcat</groupId>
+    <artifactId>tomcat-catalina-ha</artifactId>
+    <version>9.0.107</version> <!-- 사용 중인 Tomcat 버전에 맞게 수정 -->
+</dependency>
 
 	</dependencies>
 
