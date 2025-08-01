@@ -47,10 +47,8 @@
 
 	<!-- INSERT -->
 	<insert id="insertBoard" parameterType="board">
-		insert into tbl_board
-		(board_no, title, content, writer)
-		values(board_seq.nextval, #{title},
-		#{content}, #{writer})
+		insert into tbl_board (board_no, title, content, writer, image) 
+		values(board_seq.nextval, #{title}, #{content}, #{writer}, #{image} )
 	</insert>
 
 	<!-- delete -->

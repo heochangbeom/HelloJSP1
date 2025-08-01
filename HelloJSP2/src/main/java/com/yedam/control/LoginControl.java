@@ -21,22 +21,24 @@ public class LoginControl implements Control {
 		// param: uname, psw
 		String id = req.getParameter("uname");
 		String pw = req.getParameter("psw");
-		
+
 		// DB처리
 		MemberService svc = new MemberServiceImpl();
 		MemberVO member = svc.userCheck(id, pw);
-		
+		System.out.println(member);
+
 		// 세션.
-		if(member == null) {
-			
-		}else {
+		if (member == null) {
+
+		} else {
 			// 세션을 활용하여 정보저장.
 			// 정상 id, pw 입력.
-			HttpSession session = req.getSession(); // 
-			session.setAttribute("logId", id); //속성(logId)=로그인아이디
+			HttpSession session = req.getSession(); //
+			session.setAttribute("logId", id); // 속성(logId)=로그인아이디
+			session.setAttribute("auth", member.getResponsibility());// uesr/Admin
+
 			resp.sendRedirect("boardList.do");
 
-			
 		}
 
 	}

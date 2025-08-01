@@ -3,7 +3,6 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 
-<jsp:include page="includes/header.jsp" />
 
 <h3>글상세화면(board.jsp)</h3>
 <!--  msg 전달값이 있으면 메세지 출력. -->
@@ -16,6 +15,7 @@
 
 <form action="modifyForm.do">
 <input type="hidden" value="${board_info.boardNo }" name="bno">
+<input type="hidden" value="${page }" name="page">
 <table class="table">
 	<tr>
 		<th>글번호</th>
@@ -26,6 +26,16 @@
 	<tr>
 		<th>제목</th>
 		<td colspan='3'><c:out value="${board_info.title }" /></td>
+		<td rowspan='2'>
+		<c:choose>
+		   <c:when test="${!empty board_info.image }">
+		      <img width="150px" src='upload/${board_info.image }'>
+	       </c:when>
+		   <c:otherwise>
+		     <img width="150px" src='https://dummyimage.com/100x100/000000/00a64d.jpg&text=No'>
+		   </c:otherwise>
+		</c:choose>
+		</td>
 	</tr>
 	<tr>
 		<th>내용</th>
@@ -34,8 +44,7 @@
 		<th>작성자</th>
 		<td><c:out value="${board_info.writer }" /></td>
 		<th>작성일시</th>
-		<td><fmt:formatDate pattern="yyyy-MM-dd HH:mm:ss"
-				value="${board_info.creationDate }" /></td>
+		<td><fmt:formatDate pattern="yyyy-MM-dd HH:mm:ss" value="${board_info.creationDate }" /></td>
 	</tr>
 	<tr>
 	   <td colspan="4" align="center">
@@ -46,4 +55,3 @@
 </table>
 </form>
 
-<jsp:include page="includes/footer.jsp" />
