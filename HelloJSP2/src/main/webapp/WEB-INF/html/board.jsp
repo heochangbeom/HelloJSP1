@@ -55,3 +55,14 @@
 </table>
 </form>
 
+<!-- 댓글 -->
+
+
+
+
+
+
+
+<script src="js/board.js"><</script>
+
+

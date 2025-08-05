@@ -7,8 +7,9 @@
 <title>WEB-INF/html/js.jsp</title>
 </head>
 <body>
-<!--  
+  
 	<h3>JS연습</h3>
+	<!--
 	<div style="display: none;">
 	 ID: <input type="text" id="mid">
 	 Name: <input type="text" id="mname"><br>
@@ -23,11 +24,11 @@
 	
 	
 	
-	<div>
+	<div id='item' style="display: none;">
 	 이름: <input type="text" id="std_name"><br>
 	 영어: <input type="number" id="std_score"><br>
 	 <button id="addList">추가</button>
-	</div>
+	</div style="display: none;">
 	<div>
 	<table border="2">
 	<thead>
@@ -40,8 +41,19 @@
 	</table>
 	</div>
 	
+	<div id='show'>
+	 <table border="2">
+	  <thead>
+	   <tr>
+	    <th>이름</th><th>점수</th>
+	   </tr>
+	  <thead>
+	 <tbody></tbody>
+	</table>
+   </div>
+
 	
-	<script type="text/javascript" src='js/data.js'></script>
+	<script type="text/javascript" src='js/ajax2.js'></script>
 </body>
 </html>
 
