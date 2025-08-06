@@ -4,15 +4,27 @@
  */
 let page = 1; // page 변경.
 // 페이지로딩시점에 실행.
-svc.replyList( {bno, page} , // 첫번째 param.
-	result => {
-		result.forEach(reply => {
-			let li = makeRow(reply);
-			document.querySelector('div.content>ul').appendChild(li);
-		})
-	}, // 두번재 param.
-	err => console.error(err)
-);
+function showReplyList() {
+	// 기존목록을 지우고...
+	document.querySelectorAll('div.content>ul>li')//
+	.forEach((elem, idx) => {
+		console.log(idx);		
+		if(idx >= 2) {
+		   elem.remove();
+		}
+	});
+	
+	svc.replyList({ bno, page }, // 첫번째 param.
+		result => {
+			result.forEach(reply => {
+				let li = makeRow(reply);
+				document.querySelector('div.content>ul').appendChild(li);
+			})
+		}, // 두번재 param.
+		err => console.error(err) //세번째 param.
+	);
+} // end of showReplyList().
+showReplyList(); //최초목록 출력.
 
 //이벤트 등록.
 document.querySelector("#addReply").addEventListener('click', function(e) {
@@ -57,6 +69,17 @@ document.querySelector("#addReply").addEventListener('click', function(e) {
 		err => console.error(err) // 3번째 param.
 	);
 });
+
+// 페이징 링크에 클릭이벤트.
+document.querySelectorAll('div.footer>div.pagination>a')//
+	.forEach(atag => {
+		atag.addEventListener('click', e => {
+			e.preventDefault(); // 기본기능을 차단.
+			page = e.target.innerText;
+			//목록그려주기.
+			showReplyList();
+		})
+	})
 
 function makeRow(reply) {
 
