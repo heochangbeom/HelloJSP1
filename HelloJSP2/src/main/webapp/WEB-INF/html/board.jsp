@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
 
 
 <h3>글상세화면(board.jsp)</h3>
@@ -55,14 +55,42 @@
 </table>
 </form>
 
-<!-- 댓글 -->
+<!-- 댓글 start-->
+<style>
+ ul {list-style-type: none;}
+ span {display: inline-block;}
+</style>
+
+ <div class="container reply">
+ <!-- 댓글등록.-->
+ <div class="header">
+  <input class="col-sm-8" type="text" id="reply">
+  <button class="btn btn-secondary" id="addReply">댓글등록</button>
+</div>
+<!-- 댓글목록.-->
+ <div class="content">
+  <ul>
+   <li>
+    <span class="col-sm-2">글번호</span>
+    <span class="col-sm-5">내용</span>
+    <span class="col-sm-2">작성자</span>
+    <span class="col-sm-2">삭제</span>
+   </li>
+   <li><hr /></li>
+  </ul>
+ </div>
+<!-- 댓글페이징.-->
+ <div class="footer">
 
 
+ </div>
+</div>
+<script>
+ const bno = "${board_info.boardNo }"; // 선언 위치 중요
+ const logId = "${logId}";
+</script>
 
-
-
-
-
+<script src="js/boardService.js"><</script>
 <script src="js/board.js"><</script>
 
 
