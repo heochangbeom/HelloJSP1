@@ -2,6 +2,35 @@
  * boardService.js
  */
 
+class PageVO {
+	// 생성자.
+	constructor(currPage, totalCnt) {
+		this.currPage = currPage; // currPage 필드 선언.
+		this.totalCnt = totalCnt;
+		// start, and 계산.
+		this.end = Math.ceil(currPage / 10) * 10; // 10page.
+		this.start = this.end - 9; // 1page
+
+		let realEnd = Math.ceil(totalCnt / 5); // 3page
+		this.end = this.end > realEnd ? realEnd : this.end;
+		// prev, next 계산
+		this.prev = this.start > 1;
+		this.next = this.end < realEnd;
+	}
+
+}
+
+/*console.log(new PageVO(23, 123));*/
+
+/*이름	  의미
+currPage  현재 페이지 번호
+totalCnt  전체 댓글 수
+start	  현재 블록의 시작 페이지 번호
+end	      현재 블록의 끝 페이지 번호
+realEnd	  전체 페이지 수 (총 댓글 수 / 5)
+*/
+
+
 const svc = {
 	count: 20, // 속성 객체
 	increaseCount: function() {   //메소드
@@ -25,11 +54,17 @@ const svc = {
 			.catch(errorCallback)
 	},
 	//등록 ajax 메소드.
-	regitsterReply(param= { bno, reply, replyer }, successCallback, errorCallback) {
+	regitsterReply(param = { bno, reply, replyer }, successCallback, errorCallback) {
 		fetch('addReply.do?bno=' + param.bno + '&reply=' + param.reply + '&replyer=' + param.replyer)
 			.then(resolve => resolve.json())
 			.then(successCallback)
 			.catch(errorCallback)
 	},
-	// 추가메소드.
+	// bno에 대한 전체ㅔ건수 얻는 ajax메소드.
+	replyTotalCount(bno, successCallback, errorCallback) {
+		fetch('totalReply.do?bno=' + bno)
+			.then(resolve => resolve.json())
+			.then(successCallback)
+			.catch(errorCallback)
+	}
 }

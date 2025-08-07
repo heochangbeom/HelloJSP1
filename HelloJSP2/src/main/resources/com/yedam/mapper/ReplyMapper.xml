@@ -29,6 +29,11 @@
 		insert into tbl_reply (reply_no, board_no, reply, replyer)
 		values(#{replyNo}, #{boardNo}, #{reply}, #{replyer})
 	</insert>
+	
+	<select id="selectCount" parameterType="int" resultType="int">
+      SELECT COUNT(*) FROM tbl_reply
+      WHERE board_no = #{boardNo}
+    </select>
 
 	
 

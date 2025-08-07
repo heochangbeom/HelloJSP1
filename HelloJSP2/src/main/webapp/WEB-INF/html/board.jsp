@@ -93,6 +93,7 @@
 </div>
 <!-- 댓글목록.-->
  <div class="content">
+
   <ul>
    <li>
     <span class="col-sm-2">글번호</span>
