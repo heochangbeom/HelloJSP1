@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+  <script>
+  // 상태: pending / fullfilled / rejected
+  
+  // promise 객체 then(). then(). then()......
+  // async, await
+  async function asyncFunction() {
+	  
+   let promise = new Promise((resolve, reject) => { // 매개값을 함수로 받음 resolve 성공, reject 실패
+       setTimeout(function(){
+    	   resolve('OK');
+       }, 1000);
+   }); 
+   
+   let reult = await fetch('....')
+  
+   let result = await promise;
+   let result2 = await result.json();
+   let result3 = await result2();
+   
+  }
+   
+    .then(function(result){
+    	console.log(result);
+    })
+    .then(function(result) {
+    	console.log(result)
+    })
+    .catch(function(err) {
+    	console.error("요기=>", err)
+    })
+  }
+  </script>
+</body>
+</html>

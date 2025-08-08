@@ -4,12 +4,13 @@
   "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.yedam.mapper.ReplyMapper">
 
-	<select id="replyList" parameterType="int" resultType="com.yedam.vo.ReplyVO">
- 	  select b. * 
-      from (select /* +INDEX_DESC(r PK_REPLY) */ r.*,rownum rn 
-            from tbl_reply r
-            where r.board_no = #{boardNo}) b
-      where b.rn > (#{page} - 1)  *5
+	<select id="replyList" parameterType="int"
+		resultType="com.yedam.vo.ReplyVO">
+		select b. *
+		from (select /* +INDEX_DESC(r PK_REPLY) */ r.*,rownum rn
+		from tbl_reply r
+		where r.board_no = #{boardNo}) b
+		where b.rn > (#{page} - 1) *5
       <![CDATA[
       and   b.rn <= (#{page} *5)
       ]]>
@@ -29,12 +30,32 @@
 		insert into tbl_reply (reply_no, board_no, reply, replyer)
 		values(#{replyNo}, #{boardNo}, #{reply}, #{replyer})
 	</insert>
-	
-	<select id="selectCount" parameterType="int" resultType="int">
-      SELECT COUNT(*) FROM tbl_reply
-      WHERE board_no = #{boardNo}
-    </select>
 
-	
+
+
+
+	<!-- (선택) 필터 조회 -->
+	<select id="eventList" parameterType="com.yedam.vo.EventVO" resultType="com.yedam.vo.EventVO">
+		SELECT title
+		, start_date AS "start"
+		, end_date AS "end"
+		FROM tbl_event
+		ORDER BY start_date DESC
+	</select>
+
+	<insert id="insertEvent" parameterType="com.yedam.vo.EventVO">
+		INSERT INTO tbl_event (title, start_date, end_date)
+		VALUES (#{title}, #{start}, #{end})
+	</insert>
+
+	<select id="selectEvent" parameterType="string" resultType="int">
+		SELECT COUNT(*) FROM tbl_event WHERE title = #{title}
+	</select>
+
+	<delete id="deleteEvent" parameterType="string">
+		DELETE FROM tbl_event WHERE title = #{title}
+	</delete>
+
+
 
 </mapper>

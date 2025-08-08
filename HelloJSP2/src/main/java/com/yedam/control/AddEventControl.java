@@ -2,43 +2,42 @@ package com.yedam.control;
 
 import java.io.IOException;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import com.google.gson.Gson;
-import com.google.gson.GsonBuilder;
 import com.yedam.common.Control;
 import com.yedam.service.ReplyService;
 import com.yedam.service.ReplyServiceImpl;
-import com.yedam.vo.EventVO;
 
-public class EventControl implements Control {
+public class AddEventControl implements Control {
 
 	@Override
 	public void execute(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-
-resp.setContentType("text/json;charset=utf-8");
+	
+		
+				
+		resp.setContentType("text/json;charset=utf-8");
 		String title = req.getParameter("title");
 		String start = req.getParameter("start");
 		String end = req.getParameter("end");
-
-		EventVO event = new EventVO();
-		event.setTitle(title);
-		event.setStart(start);
-		event.setEnd(end);
-	    ReplyService svc = new ReplyServiceImpl();
 		
-		List<EventVO> list = svc.eventList(event);
-		Map<String, Object> map = new HashMap<String, Object>();
-		map.put("list", list);
-		Gson gson = new GsonBuilder().create();
+		Map<String, Object> map = new HashMap<>();
+	    map.put("title", title);
+	    map.put("start", start);
+	    map.put("end",   end);
 		
-		String json = gson.toJson(list);
-		resp.getWriter().print(json);
-	}
+		ReplyService svc = new ReplyServiceImpl();
+		try {
+			svc.addEvent(map);
+			resp.getWriter().print("{\"retCode\":\"OK\"}"); //
+		} catch (Exception e) {
+			//e.printStackTrace();
+			resp.getWriter().print("{\"retCode\":\"NG\"}"); // 
+		}
 
-}
+	}// end of execute.
+
+} // end of class.

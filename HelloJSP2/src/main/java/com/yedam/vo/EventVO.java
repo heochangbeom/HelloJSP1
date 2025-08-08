@@ -4,12 +4,8 @@ import lombok.Data;
 
 @Data
 public class EventVO {
-	private int    boardNo; //getBoardNo(), setBoardNo(int bno)
-	private String event;
-	private int    eventNo;
-	private String eventStart;
-	private String eventEnd;
 	
-	
-
+	private String title;
+	private String start;
+	private String end;
 }
